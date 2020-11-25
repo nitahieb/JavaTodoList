@@ -13,7 +13,7 @@
 - Create a timetable for your recurring tasks.
 
 ## FAQ
-**Who is this application made for?**
+**Who is this application made for?** 
 
 This application is made for anyone who needs a ToDo list! I would say it is developed around the needs of students but many other people have a need for similar features.
 
