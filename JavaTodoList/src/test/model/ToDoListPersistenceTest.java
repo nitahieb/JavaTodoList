@@ -14,11 +14,6 @@ public class ToDoListPersistenceTest {
     private Task fourthTask;
     private ToDoList emptyTodolist;
     private ToDoList emptyTodolist2;
-    private String fileLocation = "./data/ToDoListTest.json";
-    private String fileLocation2 = "./data/ToDoListTest2.json";
-    private String fileLocation3 = "./data/ToDoListTest3.json";
-    private String invalidFileLocation = "/this/is/notreal/?.json";
-
 
 
     @BeforeEach
@@ -42,6 +37,7 @@ public class ToDoListPersistenceTest {
 
     @Test
     void testSaveLoadempty(){
+        String fileLocation2 = "JavaTodoList/data/ToDoListTest2.json";
         emptyTodolist2.loadAll(fileLocation2);
         assertEquals(0, emptyTodolist2.toDoListLength());
 
@@ -49,6 +45,7 @@ public class ToDoListPersistenceTest {
 
     @Test
     void testSaveLoadAllWithTasks(){
+        String fileLocation3 = "JavaTodoList/data/ToDoListTest3.json";
         toDolist.saveAll(fileLocation3);
         emptyTodolist.loadAll(fileLocation3);
         assertEquals(emptyTodolist.toDoListLength(), 3);
@@ -63,6 +60,7 @@ public class ToDoListPersistenceTest {
 
     @Test
     void testLoadError(){
+        String invalidFileLocation = "/this/is/notreal/?.json";
         emptyTodolist.loadAll(invalidFileLocation);
         assertEquals(0, emptyTodolist.toDoListLength());
     }

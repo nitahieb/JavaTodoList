@@ -1,13 +1,7 @@
 package ui.gui;
 
-import model.Task;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.io.File;
 
 //Class for ButtonPanel
 public class ButtonPanel extends JToolBar {
@@ -69,28 +63,28 @@ public class ButtonPanel extends JToolBar {
 
     //Sets icons for Jbuttons
     public void setIcons() {
-        ImageIcon addimage = new ImageIcon("./data/Plus.png");
+        ImageIcon addimage = new ImageIcon("JavaTodoList/data/Plus.png");
         Image img = addimage.getImage();
         Image plusImg = img.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
         addTask.setIcon(new ImageIcon(plusImg));
 
 
-        ImageIcon minusImage = new ImageIcon("./data/minus.png");
+        ImageIcon minusImage = new ImageIcon("JavaTodoList/data/minus.png");
         Image img2 = minusImage.getImage();
         Image minusImg = img2.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
         removeTask.setIcon(new ImageIcon(minusImg));
 
-        ImageIcon editImage = new ImageIcon("./data/edit.png");
+        ImageIcon editImage = new ImageIcon("JavaTodoList/data/edit.png");
         Image img3 = editImage.getImage();
         Image editImg = img3.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
         editTask.setIcon(new ImageIcon(editImg));
 
-        ImageIcon completeImage = new ImageIcon("./data/BlueCheck.png");
+        ImageIcon completeImage = new ImageIcon("JavaTodoList/data/BlueCheck.png");
         Image img4 = completeImage.getImage();
         Image completeImg = img4.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
         completeTask.setIcon(new ImageIcon(completeImg));
 
-        ImageIcon exitImage = new ImageIcon("./data/Exit.png");
+        ImageIcon exitImage = new ImageIcon("JavaTodoList/data/Exit.png");
         Image img5 = exitImage.getImage();
         Image exitImg = img5.getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
         quit.setIcon(new ImageIcon(exitImg));

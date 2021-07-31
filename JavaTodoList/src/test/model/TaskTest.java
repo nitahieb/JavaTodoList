@@ -33,11 +33,12 @@ public class TaskTest {
         assertEquals(firstTask.getDueDate(), 20200220);
     }
 
+    @SuppressWarnings("unused")
     @Test
     void testExceptionThrownConstructor() {
         try {Task invalidTask = new Task("", "", 0);
             fail("Exception should have been thrown");
-        } catch (InvalidTitleException i) {
+        } catch (InvalidTitleException ignored) {
 
         }
     }
@@ -59,7 +60,7 @@ public class TaskTest {
         try {
             firstTask.changeName("");
             fail("Exception should have been thrown");
-        } catch (InvalidTitleException i) {
+        } catch (InvalidTitleException ignored) {
 
         }
 
@@ -93,15 +94,13 @@ public class TaskTest {
 
     @Test
     void testEquals() {
-        assertTrue(secondTask.equals(firstTask));
-        assertTrue(firstTask.equals(secondTask));
-        assertFalse(firstTask.equals(thirdTask));
-        assertFalse(thirdTask.equals(firstTask));
-        assertFalse(thirdTask.equals(fourthTask));
-        assertFalse(thirdTask.equals(null));
-        assertFalse("task".equals(firstTask));
-        assertFalse(firstTask.equals("task"));
-        assertTrue(fourthTask.equals(fifthTask));
+        assertEquals(secondTask, firstTask);
+        assertEquals(firstTask, secondTask);
+        assertNotEquals(firstTask, thirdTask);
+        assertNotEquals(thirdTask, firstTask);
+        assertNotEquals(thirdTask, fourthTask);
+        assertNotEquals(null, thirdTask);
+        assertEquals(fourthTask, fifthTask);
 
 
     }

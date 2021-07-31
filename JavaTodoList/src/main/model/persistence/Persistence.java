@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 //deals with ToDoList Object Persistence
 public class Persistence extends ToDoList {
-    String fileLocation;
+    final String fileLocation;
 
     public Persistence(String fileLocation) {
         this.fileLocation = fileLocation;
@@ -41,13 +41,13 @@ public class Persistence extends ToDoList {
             }.getType();  // https://stackoverflow.com/questions/32444863/google-gson-linkedtreemap-class-cast-to-myclass
             ArrayList<Task> loadedlist = new Gson().fromJson(bf, arrayType);
             if (loadedlist == null) {
-                return new ArrayList();
+                return new ArrayList<Task>();
             } else {
                 todoList.addAll(loadedlist);
                 return loadedlist;
             }
         } catch (FileNotFoundException e) {
-            return new ArrayList();
+            return new ArrayList<Task>();
         }
     }
 }

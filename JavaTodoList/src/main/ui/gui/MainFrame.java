@@ -10,24 +10,32 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
 
 //Class that holds the main JFrame and puts everything together
 public class MainFrame extends JFrame {
 
     private ButtonPanel buttonPanel;
-    private JRadioButton task1;
-    private JRadioButton task2;
-    private JRadioButton task3;
-    private JRadioButton task4;
-    private JRadioButton task5;
-    private JRadioButton task6;
-    private ButtonGroup buttonGroup;
     private JPanel radioPanel;
-    private ToDoList toDoList;
+    private final ToDoList toDoList;
     private AddDialog addDialog;
     private EditDialog editDialog;
-    private String fileLocation = "./data/ToDoList.json";
-
+    private final String fileLocation = "JavaTodoList/data/ToDoList.json";
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
+    private JRadioButton task1 = new JRadioButton("");
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
+    private JRadioButton task2 = new JRadioButton("");
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
+    private JRadioButton task3 = new JRadioButton("");
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
+    private JRadioButton task4 = new JRadioButton("");
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
+    private JRadioButton task5 = new JRadioButton("");
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
+    private JRadioButton task6 = new JRadioButton("");
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
+    private ArrayList<JRadioButton> toDoButtonList = new ArrayList<JRadioButton>();
 
 
     //Sets up the main Jframe
@@ -37,15 +45,7 @@ public class MainFrame extends JFrame {
         toDoList = new ToDoList();
         toDoList.loadAll(fileLocation);
         initializeButtonPanel();
-        JLabel instructions = new JLabel("<html>This is a ToDoList App <br>"
-                + "1. You can only add 6 tasks to the ToDoList <br>  "
-                + "2. Tasks have to have a unique name or they will not be added <br>"
-                + "3. The DueDate for tasks has to be an int, if not they will not be added <br>"
-                + "4. Don't click remove/complete/edit button when no task is selected (includes blank ones) <br>"
-                + "5. Tasks will save when save button is pressed, you can exit app however you please after<br>"
-                + "6. Tasks will save and load automatically with the in app exit button </html>");
         add(buttonPanel, BorderLayout.NORTH);
-        add(instructions, BorderLayout.SOUTH);
         add(radioPanel, BorderLayout.LINE_START);
 
         setSize(1000, 1000);
@@ -61,25 +61,14 @@ public class MainFrame extends JFrame {
     private void initializeButtonPanel() {
         buttonPanel = new ButtonPanel();
         radioPanel = new JPanel(new GridLayout(0, 1));
-        task1 = new JRadioButton("");
-        task2 = new JRadioButton("");
-        task3 = new JRadioButton("");
-        task4 = new JRadioButton("");
-        task5 = new JRadioButton("");
-        task6 = new JRadioButton("");
-        buttonGroup = new ButtonGroup();
-        buttonGroup.add(task1);
-        buttonGroup.add(task2);
-        buttonGroup.add(task3);
-        buttonGroup.add(task4);
-        buttonGroup.add(task5);
-        buttonGroup.add(task6);
-        radioPanel.add(task1);
-        radioPanel.add(task2);
-        radioPanel.add(task3);
-        radioPanel.add(task4);
-        radioPanel.add(task5);
-        radioPanel.add(task6);
+        ButtonGroup buttonGroup = new ButtonGroup();
+        Collections.addAll(toDoButtonList,task1,task2,task3,task4,task5,task6);
+        for (int i=0;i<toDoButtonList.size();i++){
+            JRadioButton task = toDoButtonList.get(i);
+            buttonGroup.add(task);
+            radioPanel.add(task);
+        }
+
         refresh();
 
     }
@@ -87,26 +76,9 @@ public class MainFrame extends JFrame {
     //refreshes the program so tasks go where they need to go
     public void refresh() {
         clearList();
-        if (toDoList.toDoListLength() == 1) {
-            task1.setText(toDoList.getTask(0).toString());
-        }
-        if (toDoList.toDoListLength() == 2) {
-            task1.setText(toDoList.getTask(0).toString());
-            task2.setText(toDoList.getTask(1).toString());
-        }
-        if (toDoList.toDoListLength() == 3) {
-            task1.setText(toDoList.getTask(0).toString());
-            task2.setText(toDoList.getTask(1).toString());
-            task3.setText(toDoList.getTask(2).toString());
-        }
-        if (toDoList.toDoListLength() == 4) {
-            set4();
-        }
-        if (toDoList.toDoListLength() == 5) {
-            set5();
-        }
-        if (toDoList.toDoListLength() == 6) {
-            set6();
+        for(int i =0;i<toDoList.toDoListLength();i++){
+            JRadioButton task = toDoButtonList.get(i);
+            task.setText(toDoList.getTask(i).toString());
         }
     }
 
@@ -152,24 +124,11 @@ public class MainFrame extends JFrame {
     private void acceptButtonListener() {
         editDialog.getChangeButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (task1.isSelected()) {
-                    toDoList.getTask(0).changeDueDate(Integer.parseInt(editDialog.getDateText().getText()));
-                }
-                if (task2.isSelected()) {
-                    toDoList.getTask(1).changeDueDate(Integer.parseInt(editDialog.getDateText().getText()));
-                }
-                if (task3.isSelected()) {
-                    toDoList.getTask(2).changeDueDate(Integer.parseInt(editDialog.getDateText().getText()));
-                }
-                if (task4.isSelected()) {
-                    toDoList.getTask(3).changeDueDate(Integer.parseInt(editDialog.getDateText().getText()));
-                }
-                if (task5.isSelected()) {
-                    toDoList.getTask(4).changeDueDate(Integer.parseInt(editDialog.getDateText().getText()));
-                }
-                if (task6.isSelected()) {
-                    toDoList.getTask(5).changeDueDate(Integer.parseInt(editDialog.getDateText().getText()));
-                }
+                 for (int i = 0;i<toDoList.toDoListLength();i++) {
+                     if (toDoButtonList.get(i).isSelected()) {
+                         toDoList.getTask(i).changeDueDate(Integer.parseInt(editDialog.getDateText().getText()));
+                     }
+                 }
                 helperAcceptButtonListener();
             }
         });
@@ -195,23 +154,11 @@ public class MainFrame extends JFrame {
     private void completeListener() {
         buttonPanel.getCompleteTask().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (task1.isSelected()) {
-                    toDoList.getTask(0).setComplete();
-                }
-                if (task2.isSelected()) {
-                    toDoList.getTask(1).setComplete();
-                }
-                if (task3.isSelected()) {
-                    toDoList.getTask(2).setComplete();
-                }
-                if (task4.isSelected()) {
-                    toDoList.getTask(3).setComplete();
-                }
-                if (task5.isSelected()) {
-                    toDoList.getTask(4).setComplete();
-                }
-                if (task6.isSelected()) {
-                    toDoList.getTask(5).setComplete();
+                for (int i = 0;i<toDoList.toDoListLength();i++) {
+                    JRadioButton task = toDoButtonList.get(i);
+                    if (task.isSelected()&& !task.getText().equals("")){
+                        toDoList.getTask(i).setComplete();
+                    }
                 }
                 refresh();
             }
@@ -227,9 +174,7 @@ public class MainFrame extends JFrame {
                     Task newTask = new Task(addDialog.getTaskName().getText(), addDialog.getTaskDesc().getText(),
                             Integer.parseInt(addDialog.getTaskDate().getText()));
                     toDoList.addTask(newTask);
-                } catch (NumberFormatException a) {
-                    addDialog.dispose();
-                } catch (InvalidTitleException i) {
+                } catch (NumberFormatException | InvalidTitleException a) {
                     addDialog.dispose();
                 }
                 addDialog.dispose();
@@ -253,23 +198,11 @@ public class MainFrame extends JFrame {
     private void removeListener() {
         buttonPanel.getRemoveTask().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (task1.isSelected()) {
-                    toDoList.removeTask(0);
-                }
-                if (task2.isSelected()) {
-                    toDoList.removeTask(1);
-                }
-                if (task3.isSelected()) {
-                    toDoList.removeTask(2);
-                }
-                if (task4.isSelected()) {
-                    toDoList.removeTask(3);
-                }
-                if (task5.isSelected()) {
-                    toDoList.removeTask(4);
-                }
-                if (task6.isSelected()) {
-                    toDoList.removeTask(5);
+                for (int i = 0;i<toDoList.toDoListLength();i++) {
+                    JRadioButton task = toDoButtonList.get(i);
+                    if (task.isSelected()&& !task.getText().equals("")) {
+                        toDoList.removeTask(i);
+                    }
                 }
                 refresh();
             }
@@ -278,33 +211,9 @@ public class MainFrame extends JFrame {
 
     //clears the gui todoList
     private void clearList() {
-        task1.setText("");
-        task2.setText("");
-        task3.setText("");
-        task4.setText("");
-        task5.setText("");
-        task6.setText("");
-    }
-
-    //sets text for 4 buttons
-    private void set4() {
-        task1.setText(toDoList.getTask(0).toString());
-        task2.setText(toDoList.getTask(1).toString());
-        task3.setText(toDoList.getTask(2).toString());
-        task4.setText(toDoList.getTask(3).toString());
-    }
-
-
-    //sets text for 5 buttons
-    private void set5() {
-        set4();
-        task5.setText(toDoList.getTask(4).toString());
-    }
-
-    //sets text for 6 buttons
-    private void set6() {
-        set5();
-        task6.setText(toDoList.getTask(5).toString());
+        for (JRadioButton task : toDoButtonList){
+            task.setText("");
+        }
     }
 
 

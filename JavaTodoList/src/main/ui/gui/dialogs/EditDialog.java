@@ -4,9 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class EditDialog extends JDialog {
-    JLabel textEnter;
-    JTextField dateText;
-    JButton changeButton;
+    final JLabel textEnter;
+    final JTextField dateText;
+    final JButton changeButton;
 
     public EditDialog() {
         setLayout(new GridLayout(3, 1));

@@ -10,13 +10,9 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PersistenceTest {
-    private ToDoList toDolist;
     private Task firstTask;
     private Task secondTask;
 
-    private String fileLocation = "./data/ToDoListTest.json";
-    private String fileLocation2 = "./data/ToDoListTest2.json";
-    private String invalidFileLocation = "/this/is/notreal/?.json";
     private Persistence persistence;
     private Persistence emptyPersistence;
     private Persistence invalidPersistence;
@@ -32,8 +28,11 @@ public class PersistenceTest {
             System.out.println("Setup is wrong");
         }
         list = new ArrayList<>();
+        String fileLocation = "JavaTodoList/data/ToDoListTest.json";
         persistence = new Persistence(fileLocation);
+        String fileLocation2 = "JavaTodoList/data/ToDoListTest2.json";
         emptyPersistence = new Persistence(fileLocation2);
+        String invalidFileLocation = "/this/is/notreal/?.json";
         invalidPersistence = new Persistence(invalidFileLocation);
 
     }

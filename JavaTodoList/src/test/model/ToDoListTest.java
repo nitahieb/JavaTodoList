@@ -90,13 +90,13 @@ public class ToDoListTest {
 
     @Test
     void testgetQueue() {
-        assertTrue(list.equals(toDolist.getQueue()));
+        assertEquals(list, toDolist.getQueue());
         toDolist.addTask(firstTask);
         toDolist.addTask(secondTask);
-        assertFalse(list.equals(toDolist.getQueue()));
+        assertNotEquals(list, toDolist.getQueue());
         list.add(firstTask);
         list.add(secondTask);
-        assertTrue(list.equals(toDolist.getQueue()));
+        assertEquals(list, toDolist.getQueue());
 
     }
 
@@ -133,7 +133,7 @@ public class ToDoListTest {
         try {
             toDolist.getTask(5);
             fail();
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException ignored) {
         }
     }
 
@@ -146,7 +146,7 @@ public class ToDoListTest {
         try {
             toDolist.removeTask(5);
             fail();
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException ignored) {
         }
     }
 

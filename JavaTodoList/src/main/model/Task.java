@@ -71,8 +71,8 @@ public class Task {
 
     //EFFECTS returns string representation of a Task
     public String toString() {
-        return name + " " + description + " that is due on " + Integer.toString(dueDate) + ". And is it complete? "
-                + Boolean.toString(complete);
+        return name + " " + description + " that is due on " + dueDate + ". And is it complete? "
+                + complete;
     }
 
     //EFFECTS compares two objects by title and returns true if they match

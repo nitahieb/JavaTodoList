@@ -1,26 +1,20 @@
 package model;
 
 
-import java.io.*;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
-import com.google.gson.Gson;
-import com.google.gson.internal.bind.util.ISO8601Utils;
-import com.google.gson.reflect.TypeToken;
 import exceptions.InvalidTitleException;
 import model.persistence.Persistence;
 
 //Represents a ToDolist that can hold tasks
 
 public class ToDoList {
-    protected ArrayList<Task> todoList;
+    protected final ArrayList<Task> todoList;
 
 
     //EFFECTS creates an empty ToDoList
     public ToDoList() {
-        this.todoList = new ArrayList<>();
+        this.todoList = new ArrayList<Task>();
     }
 
     //EFFECTS selects the task based on taskTitle input
@@ -50,7 +44,10 @@ public class ToDoList {
     //MODIFIES this
     //EFFECTS removes the task with the containing taskTitle if no matches do nothing
     public void removeTask(String taskTitle) {
-        todoList.remove(selectTask(taskTitle));
+        Task task = selectTask(taskTitle);
+        if (task != null) {
+            todoList.remove(task);
+        }
     }
 
     //MODIFIES this
