@@ -22,19 +22,12 @@ public class MainFrame extends JFrame {
     private AddDialog addDialog;
     private EditDialog editDialog;
     private final String fileLocation = "JavaTodoList/data/ToDoList.json";
-    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private JRadioButton task1 = new JRadioButton("");
-    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private JRadioButton task2 = new JRadioButton("");
-    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private JRadioButton task3 = new JRadioButton("");
-    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private JRadioButton task4 = new JRadioButton("");
-    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private JRadioButton task5 = new JRadioButton("");
-    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private JRadioButton task6 = new JRadioButton("");
-    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private ArrayList<JRadioButton> toDoButtonList = new ArrayList<JRadioButton>();
 
 
